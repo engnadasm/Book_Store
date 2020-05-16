@@ -21,7 +21,7 @@ import javax.swing.text.PlainDocument;
 	private HashMap<String, String[]> SearchBooks;
 	//private Stack<String[]> userCart;
 	private static Start single_instance = null; 
-	  
+	private static boolean isManager = false;
   
     // private constructor restricted to this class itself 
     private Start() 
@@ -46,7 +46,7 @@ import javax.swing.text.PlainDocument;
 	
 	public static void Load_menubar(JFrame mainFrame) {
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 450, 35);
+		menuBar.setBounds(0, 0, 500, 35);
 		mainFrame.getContentPane().add(menuBar);
 		
 		
@@ -85,7 +85,7 @@ import javax.swing.text.PlainDocument;
 		btnCart.setForeground(Color.BLUE);
 		btnCart.setBounds(147, 211, 135, 39);
 		menuBar.add(btnCart);
-		
+
 		JButton btnHome = new JButton("Home");
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +98,21 @@ import javax.swing.text.PlainDocument;
 		btnHome.setBounds(147, 211, 135, 39);
 		menuBar.add(btnHome);
 		
+		JButton btnManage = new JButton("Manage");
+
+		if(isManager) {
+		btnManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.dispose();
+				new ManageFrame();
+			}
+		});
+		btnManage.setFont(new Font("Stencil", Font.BOLD, 16));
+		btnManage.setForeground(Color.BLUE);
+		btnManage.setBounds(147, 211, 135, 39);
+		menuBar.add(btnManage);
+		}
+		
 		System.out.println(mainFrame.getName());
 		if(mainFrame.getName().equals("Home")) {
 			btnHome.setEnabled(false);
@@ -105,6 +120,8 @@ import javax.swing.text.PlainDocument;
 			btnProfile.setEnabled(false);
 		} else if(mainFrame.getName().equals("Cart")) {
 			btnCart.setEnabled(false);
+		} else if(mainFrame.getName().equals("Manage Frame")) {
+			btnManage.setEnabled(false);
 		} 
 	}
 
@@ -152,5 +169,13 @@ import javax.swing.text.PlainDocument;
 	
 	public HashMap<String, String[]> getSearchBook(){
 		return this.SearchBooks;
+	}
+	
+	public void setManager(boolean check) {
+		this.isManager = check;
+	}
+	
+	public boolean isManager() {
+		return this.isManager;
 	}
 }
