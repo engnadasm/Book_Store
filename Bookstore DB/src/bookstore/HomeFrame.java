@@ -59,6 +59,7 @@ public class HomeFrame extends JFrame {
 	        btnSearch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new SearchFrame();
+					new Credit_cardFrame();
 					mainFrame.dispose();
 				}
 			});
