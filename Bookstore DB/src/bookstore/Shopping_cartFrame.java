@@ -1,23 +1,28 @@
 package bookstore;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
 public class Shopping_cartFrame extends JFrame {
 
+	private static Start start = Start.getInstance();
+	
 	private JFrame mainFrame;
+	private static HashMap<String, String[]> books = start.getSearchBook();
+	private static int noBooks = 30;
+	private static int noPags = noBooks/10;
+	private static int currPag = 1;
 	
 	JTextField[] all_JTextField = new JTextField[]{new JTextField(), new JTextField(),new JTextField(),
 			new JTextField(), new JTextField(),new JTextField(),
@@ -41,7 +46,8 @@ public class Shopping_cartFrame extends JFrame {
 	 */
 	public Shopping_cartFrame() {
 		mainFrame = new JFrame("Cart");
-		mainFrame.setBounds(100, 100, 526, 601);
+		mainFrame.setName("Cart");
+		mainFrame.setBounds(100, 100, 543, 601);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setVisible(true);
 		
@@ -63,7 +69,7 @@ public class Shopping_cartFrame extends JFrame {
 		lblBookprice.setBounds(190, 50, 90, 15);
 		mainFrame.getContentPane().add(lblBookprice);
 		
-		JLabel lblPagenum = new JLabel("Page number " + "" + " of total "+ "");
+		JLabel lblPagenum = new JLabel("Page number " + currPag + " of total "+ noPags);
 		lblPagenum.setForeground(Color.RED);
 		lblPagenum.setFont(new Font("Sitka Subheading", Font.BOLD, 16));
 		lblPagenum.setBounds(300, 50, 200, 15);
@@ -73,7 +79,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 1_book
 				//JPanel all_JPanel[1 = new JPanel();
 				all_JPanel[1].setLayout(null);
-				all_JPanel[1].setBounds(0, 80, 500, 30);
+				all_JPanel[1].setBounds(0, 100, 500, 30);
 				all_JPanel[1].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[1]);		
 				
@@ -110,7 +116,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 2_book
 				//JPanel all_JPanel[2 = new JPanel();
 				all_JPanel[2].setLayout(null);
-				all_JPanel[2].setBounds(0, 120, 500, 30);
+				all_JPanel[2].setBounds(0, 140, 500, 30);
 				all_JPanel[2].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[2]);		
 				
@@ -147,7 +153,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 3_book
 				//JPanel all_JPanel[3 = new JPanel();
 				all_JPanel[3].setLayout(null);
-				all_JPanel[3].setBounds(0, 160, 500, 30);
+				all_JPanel[3].setBounds(0, 180, 500, 30);
 				all_JPanel[3].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[3]);		
 				
@@ -184,7 +190,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 4_book
 				//JPanel all_JPanel[4 = new JPanel();
 				all_JPanel[4].setLayout(null);
-				all_JPanel[4].setBounds(0, 200, 500, 30);
+				all_JPanel[4].setBounds(0, 220, 500, 30);
 				all_JPanel[4].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[4]);		
 				
@@ -221,7 +227,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 5_book
 				//JPanel all_JPanel[5 = new JPanel();
 				all_JPanel[5].setLayout(null);
-				all_JPanel[5].setBounds(0, 240, 500, 30);
+				all_JPanel[5].setBounds(0, 260, 500, 30);
 				all_JPanel[5].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[5]);		
 				
@@ -258,7 +264,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 6_book
 				//JPanel all_JPanel[6 = new JPanel();
 				all_JPanel[6].setLayout(null);
-				all_JPanel[6].setBounds(0, 280, 500, 30);
+				all_JPanel[6].setBounds(0, 300, 500, 30);
 				all_JPanel[6].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[6]);		
 				
@@ -295,7 +301,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 7_book
 				//JPanel all_JPanel[7 = new JPanel();
 				all_JPanel[7].setLayout(null);
-				all_JPanel[7].setBounds(0, 320, 500, 30);
+				all_JPanel[7].setBounds(0, 340, 500, 30);
 				all_JPanel[7].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[7]);		
 				
@@ -332,7 +338,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 8_book
 				//JPanel all_JPanel[8 = new JPanel();
 				all_JPanel[8].setLayout(null);
-				all_JPanel[8].setBounds(0, 360, 500, 30);
+				all_JPanel[8].setBounds(0, 380, 500, 30);
 				all_JPanel[8].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[8]);		
 				
@@ -369,7 +375,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 9_book
 				//JPanel all_JPanel[9 = new JPanel();
 				all_JPanel[9].setLayout(null);
-				all_JPanel[9].setBounds(0, 400, 500, 30);
+				all_JPanel[9].setBounds(0, 420, 500, 30);
 				all_JPanel[9].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[9]);		
 				
@@ -406,7 +412,7 @@ public class Shopping_cartFrame extends JFrame {
 		//related to 10_book
 				//JPanel all_JPanel[10 = new JPanel();
 				all_JPanel[10].setLayout(null);
-				all_JPanel[10].setBounds(0, 440, 500, 30);
+				all_JPanel[10].setBounds(0, 460, 500, 30);
 				all_JPanel[10].setVisible(false);
 				mainFrame.getContentPane().add(all_JPanel[10]);			
 				
@@ -452,10 +458,11 @@ public class Shopping_cartFrame extends JFrame {
 				mainFrame.getContentPane().add(textField);
 				
 				JButton btnConfirm_all = new JButton("Confirm_all");
-				btnConfirm_all.setFont(new Font("Stencil", Font.BOLD, 16));
+				btnConfirm_all.setFont(new Font("Stencil", Font.BOLD, 14));
 				btnConfirm_all.setForeground(Color.BLUE);
 				btnConfirm_all.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						new Credit_cardFrame();
 					}
 				});
 				btnConfirm_all.setBounds(178, 504, 149, 24);
@@ -466,7 +473,7 @@ public class Shopping_cartFrame extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
-				btnRemoveall.setFont(new Font("Stencil", Font.BOLD, 16));
+				btnRemoveall.setFont(new Font("Stencil", Font.BOLD, 14));
 				btnRemoveall.setForeground(Color.BLUE);
 				btnRemoveall.setBounds(369, 505, 141, 23);
 				mainFrame.getContentPane().add(btnRemoveall);
@@ -477,17 +484,77 @@ public class Shopping_cartFrame extends JFrame {
 				lblOr.setBounds(337, 508, 22, 14);
 				mainFrame.getContentPane().add(lblOr);
 				
+				JButton btnNewButtonN = new JButton("Next");
+				btnNewButtonN.setBounds(384, 76, 80, 20);
+				mainFrame.getContentPane().add(btnNewButtonN);
+				
+				JButton btnNewButtonP = new JButton("Previous");
+				btnNewButtonP.setBounds(284, 76, 90, 20);
+				mainFrame.getContentPane().add(btnNewButtonP);
+				/**
+				 * action of button go to get number of page.
+				 */
+				btnNewButtonN.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) { 
+						if (currPag < noPags) {
+							currPag++;
+							System.out.println(currPag);
+							lblPagenum.setText("Page number " + currPag + " of total "+ noPags);
+						}
+					}
+				});
+				
+				btnNewButtonP.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (currPag > 1) {
+							currPag--;
+							System.out.println(currPag);
+							lblPagenum.setText("Page number " + currPag + " of total "+ noPags);
+						}
+					}
+				});
+				
 				function();
 	}
 	
 	private void function() {
-		/* int noCurrBook = noBooks-(10*(currPag-1));
+		 int noCurrBook = noBooks-(10*(currPag-1));
 		 if(noCurrBook > 10) {
 			 noCurrBook = 10;
-		 }*/
-		 
-		 for (int y = 1; y <= 10; y++) {
+		 }
+		Start s = Start.getInstance();
+		 String sqlSelect = "SELECT * FROM Book where ISBN = '" + s.getUserEmail() + "';";
+		 ResultSet rs = null;
+			try {
+				rs = MainFram.stmt.executeQuery(sqlSelect);			 	  
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		 for (int y = 1; y <= noCurrBook; y++) {
 			 all_JPanel[y].setVisible(true);
+			 try {
+					rs = MainFram.stmt.executeQuery(sqlSelect);
+		            while(rs.next()) {
+		            	all_JTextField[3 * y - 3].setText(rs.getString("ISBN"));
+		            	all_JTextField[3 * y - 2].setText(rs.getString("title"));
+		            	all_JTextField[3 * y - 1].setText(rs.getString("price"));
+		            }
+			 } catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+			}
+			 all_Btn[2 * y - 1].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+			 all_Btn[2 * y].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						new Info_Book();
+					}
+				});
 		 }
 	}
 }

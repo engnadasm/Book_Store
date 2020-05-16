@@ -38,7 +38,7 @@ public class MainFram extends JFrame{
         {
 			String userName = "root";
 			String password = "12345";
-			String url = "jdbc:MySQL://localhost:3306/final_project";        
+			String url = "jdbc:MySQL://localhost:3306/bookstore";        
 			conn = DriverManager.getConnection (url, userName, password);
 			System.out.println ("\nDatabase Connection Established...");
 			stmt = conn.createStatement();
@@ -106,6 +106,8 @@ public class MainFram extends JFrame{
 		pass_text.setBounds(134, 100, 250, 40);
 		frame.getContentPane().add(pass_text);
 		
+		 Start s = Start.getInstance();
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(email_text.getText().equals("")) {
@@ -127,9 +129,16 @@ public class MainFram extends JFrame{
 		               while(rs1.next()) {
 		            	   String out = rs1.getString("log_in('"+ email_text.getText() + "','" + pass_text.getText() + "')");
 		            	   if (out.equals("You log_in Successfully.....")) {
-		            		   System.out.println (out);
-		            		   Start s = Start.getInstance();
 		            		   s.setUserEmail(email_text.getText());
+		            	   
+		
+		            			   String sql2 = "SELECT * FROM users where email = '" + email_text.getText() + "';";
+		            			    rs1 = stmt.executeQuery(sql2);
+		    		               while(rs1.next()) {
+		    		            	   System.out.println(rs1.getString("is_manager"));
+				            		   s.setManager(rs1.getString("is_manager").equals("1"));
+		    		               }
+		            		   
 			            	   frame.dispose();
 		            		   new HomeFrame();
 		            	   } else {
