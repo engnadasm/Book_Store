@@ -1,4 +1,4 @@
-package online_bookstore;
+package bookstore;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;

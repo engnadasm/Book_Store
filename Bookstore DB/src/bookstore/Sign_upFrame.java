@@ -1,4 +1,4 @@
-package online_bookstore;
+package bookstore;
 
 import java.awt.Color;
 import java.awt.Font;
