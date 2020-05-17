@@ -291,10 +291,7 @@ declare msg varchar(500);
 declare num int;
 SELECT quantity into num FROM book
 WHERE book.ISBN = ordered_ISBN;
-IF copies_no <=  num  THEN
-	UPDATE book SET book.quantity = book.quantity - copies_no
-	WHERE book.ISBN = ordered_ISBN;
-	set msg = concat('The order is done correctly.'); 
+IF copies_no <=  num  THEN set msg = concat('The order is done correctly.'); 
 ELSE set msg = concat("The number of books can't be negative");
 END IF; 
 RETURN msg;
@@ -327,6 +324,24 @@ INSERT INTO users VALUES(email_user , user_name  , password_user , first_name ,
 end if ;
 return msg ;
 End$$
+
+DELIMITER ;
+-- -----------------------------------------------------
+-- procedure order_insertion
+-- -----------------------------------------------------
+
+USE `bookstore`;
+DROP procedure IF EXISTS `order_insertion`;
+
+DELIMITER $$
+USE `bookstore`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order_insertion`(IN ordered_ISBN varchar(15),IN copies_no int,IN user_email varchar(30), 
+IN sell_date DATETIME)
+BEGIN
+	UPDATE book SET book.quantity = book.quantity - copies_no
+	WHERE book.ISBN = ordered_ISBN;
+	INSERT INTO book_sales VALUES(ordered_ISBN, user_email, copies_no, sell_date); 
+END$$
 
 DELIMITER ;
 
