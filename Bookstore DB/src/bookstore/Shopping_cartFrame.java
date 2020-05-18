@@ -127,6 +127,7 @@ private static Start start = Start.getInstance();
 				btnConfirm_all.setForeground(Color.BLUE);
 				btnConfirm_all.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+				    	mainFrame.hide();
 						new Credit_cardFrame();
 						
 					}
