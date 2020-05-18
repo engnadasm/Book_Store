@@ -27,7 +27,8 @@ public class Info_Book extends JFrame {
 	private JTextField category_text;
 	private JTextField price_text;
 	private JTextField quantity_text;
-		
+	private Start s = Start.getInstance();
+
 	private JButton btnOK;
 	/**
 	 * Create the frame.
@@ -35,6 +36,7 @@ public class Info_Book extends JFrame {
 	public Info_Book() {
 		mainFrame = new JFrame("Book information");
 		mainFrame.setBounds(100, 100, 526, 526);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setVisible(true);
 		
@@ -59,12 +61,14 @@ public class Info_Book extends JFrame {
 		ISBN_text = new JTextField("");
 		ISBN_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		ISBN_text.setBounds(204, 57, 250, 40);
-		ISBN_text.setEnabled(false);
+		if(!s.isManager())
+			ISBN_text.setEnabled(false);
 		mainFrame.getContentPane().add(ISBN_text);
 		
 		Title_text = new JTextField();
 		Title_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		Title_text.setBounds(204, 107, 250, 40);
+		if(!s.isManager())
 		Title_text.setEnabled(false);
 		mainFrame.getContentPane().add(Title_text);
 		
@@ -82,6 +86,7 @@ public class Info_Book extends JFrame {
 		
 		p_year_text = new JTextField("");
 		p_year_text.setFont(new Font("Tahoma", Font.BOLD, 16));
+		if(!s.isManager())
 		p_year_text.setEnabled(false);
 		p_year_text.setBounds(204, 157, 250, 40);
 		mainFrame.getContentPane().add(p_year_text);
@@ -89,6 +94,7 @@ public class Info_Book extends JFrame {
 		publishername_text = new JTextField();
 		publishername_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		publishername_text.setBounds(204, 207, 250, 40);
+		if(!s.isManager())
 		publishername_text.setEnabled(false);
 		mainFrame.getContentPane().add(publishername_text);
 		
@@ -107,12 +113,14 @@ public class Info_Book extends JFrame {
 		category_text = new JTextField("");
 		category_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		category_text.setBounds(204, 257, 250, 40);
+		if(!s.isManager())
 		category_text.setEnabled(false);
 		mainFrame.getContentPane().add(category_text);
 		
 		price_text = new JTextField("");
 		price_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		price_text.setBounds(204, 307, 250, 40);
+		if(!s.isManager())
 		price_text.setEnabled(false);
 		mainFrame.getContentPane().add(price_text);
 		
@@ -125,12 +133,12 @@ public class Info_Book extends JFrame {
 		quantity_text = new JTextField("");
 		quantity_text.setFont(new Font("Tahoma", Font.BOLD, 16));
 		quantity_text.setBounds(204, 357, 250, 40);
+		if(!s.isManager())
 		quantity_text.setEnabled(false);
 		mainFrame.getContentPane().add(quantity_text);
 		
-		Start s = Start.getInstance();
 		
-		String sqlSelect = "SELECT * FROM Book where ISBN = '" + s.getUserEmail() + "';";
+		String sqlSelect = "SELECT * FROM Book where ISBN = '" + s.getISBNInfo_Book() + "';";
 		try {
 			
 			ResultSet rs = MainFram.stmt.executeQuery(sqlSelect);
@@ -153,7 +161,11 @@ public class Info_Book extends JFrame {
 		btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				if(!s.isManager()) {
+					//Toqa
+				}
+
+				mainFrame.hide();
 			}
 		});
 		btnOK.setFont(new Font("Stencil", Font.BOLD, 16));

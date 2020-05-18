@@ -22,6 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class Credit_cardFrame extends JFrame {
@@ -80,7 +83,39 @@ public class Credit_cardFrame extends JFrame {
 				Date selectedDate = (Date) datePicker.getModel().getValue();
 				if(selectedDate != null) {
 					if(selectedDate.compareTo(new Date()) >= 0) {
-						System.out.println("enter");
+						String[] books = start.getarrBooksCart();
+						for(int i = 0; i < start.getCart().size(); i++) {
+							String[] attr = start.getCart().get(books[i]);
+							String  sqlSelect = "";
+							//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+							SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+						    Date now = new Date();
+						    String strDate = sdfDate.format(now);
+						   sqlSelect = "call order_insertion('"+  books[i] + "', "+ attr[8] + ",  '" + start.getUserEmail() + "' , '"+ strDate+ "');";
+						   try {
+							MainFram.stmt.addBatch(sqlSelect);
+							start.removeAllBookCart();
+							mainFrame.hide();
+							new Shopping_cartFrame();
+
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+						}
+						//System.out.println(sqlSelect);
+							try {
+								MainFram.stmt.executeBatch();
+								/*ResultSet	rs = MainFram.stmt.executeQuery(sqlSelect);	
+								while(rs.next()) {
+									System.out.println("enter");
+					            }*/
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 					}
 				}
 				

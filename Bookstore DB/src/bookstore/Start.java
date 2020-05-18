@@ -17,17 +17,44 @@ import javax.swing.text.PlainDocument;
 
  class Start {
 	private String userEmail;
-	private HashMap<String, String[]> userCart;
+	private HashMap<String, String[]> userCart = new HashMap<String, String[]>();
 	private HashMap<String, String[]> SearchBooks;
+	private String[] arrBooks;
+
 	//private Stack<String[]> userCart;
 	private static Start single_instance = null; 
 	private static boolean isManager = false;
+	private String search;
+	private String category;
+	private String keySearch;
+	private String ISBNInfo_Book;
+	private int pagNumSearch = 1;
+	private boolean first = true;
+	private int count = 0;
+	private String[] arrBooksCart = new String[100000];
   
     // private constructor restricted to this class itself 
     private Start() 
     { 
 
     } 
+    
+    public void setStartToNull(Start n) {
+    	removeAllBookCart();
+		setBoolFirst(true);
+		setUserEmail("");
+		searchBooks(new HashMap<String, String[]>());
+		isManager = false;
+		search = "";
+		category = "";
+		keySearch = "";
+		ISBNInfo_Book = "";
+		pagNumSearch = 1;
+		first = true;
+		int count = 0;
+		arrBooksCart = new String[100000];
+    	this.single_instance = null;
+    }
   
     // static method to create instance of Singleton class 
     public static Start getInstance() 
@@ -37,6 +64,14 @@ import javax.swing.text.PlainDocument;
   
         return single_instance; 
     } 
+    
+    public void setBoolFirst(boolean first) {
+    	this.first = first;
+    }
+    
+    public boolean getBoolFirst() {
+    	return this.first;
+    }
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -44,16 +79,33 @@ import javax.swing.text.PlainDocument;
 
 	}
 	
+	public void setISBNInfo_Book(String ISBNInfo_Book) {
+		this.ISBNInfo_Book = ISBNInfo_Book;
+	}
+	
+	public String getISBNInfo_Book() {
+		return ISBNInfo_Book;
+	}
+	
+	public void setPagNumSearch(int pagNumSearch) {
+		this.pagNumSearch = pagNumSearch;
+	}
+	
+	public int getpagNumSearch() {
+		return pagNumSearch;
+	}
+	
 	public static void Load_menubar(JFrame mainFrame) {
+		Start start = Start.getInstance();
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 500, 35);
 		mainFrame.getContentPane().add(menuBar);
 		
-		
 		JButton btnLog_out = new JButton("Log_out");
 		btnLog_out.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				start.setStartToNull(null);
+				mainFrame.hide();
 				new MainFram();
 			}
 		});
@@ -65,7 +117,7 @@ import javax.swing.text.PlainDocument;
 		JButton btnProfile = new JButton("Profile");
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				mainFrame.hide();
 				new Update_Info();
 			}
 		});
@@ -77,7 +129,7 @@ import javax.swing.text.PlainDocument;
 		JButton btnCart = new JButton("Cart");
 		btnCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				mainFrame.hide();
 				new Shopping_cartFrame();
 			}
 		});
@@ -89,7 +141,7 @@ import javax.swing.text.PlainDocument;
 		JButton btnHome = new JButton("Home");
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				mainFrame.hide();
 				new HomeFrame();
 			}
 		});
@@ -103,7 +155,7 @@ import javax.swing.text.PlainDocument;
 		if(isManager) {
 		btnManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.dispose();
+				mainFrame.hide();
 				new ManageFrame();
 			}
 		});
@@ -139,25 +191,31 @@ import javax.swing.text.PlainDocument;
 	}
 	
 	public void addBookIntoCart(String idBook, String[] bookInfo) {
-		if ( userCart.containsKey(idBook) ) {
-			
-			modifyBookCart(idBook, bookInfo);
-		}else {
 			userCart.put(idBook, bookInfo);
-		}
+			this.arrBooksCart[count] = idBook;
+			count++;
 	}
 	
-	private void modifyBookCart(String idBook, String[] bookInfo) {
-		
+	public String[] getarrBooksCart() {
+		return this.arrBooksCart;
 	}
+	
+	public void setarrBooksCart(String[] arrBooksCart) {
+		 this.arrBooksCart = arrBooksCart;
+	}
+	
 	
 	public void removeBookFromCart(String idbook) {
 		userCart.remove(idbook);
+		count--;
+		//this.arrBooksCart = new String[this.arrBooksCart.length];
 	}
 	
 	public void removeAllBookCart() {
 		userCart.clear();
+		count = 0;
 	}
+	
 	
 	public int numBookCart() {
 		return userCart.size();
@@ -170,6 +228,14 @@ import javax.swing.text.PlainDocument;
 	public HashMap<String, String[]> getSearchBook(){
 		return this.SearchBooks;
 	}
+		
+	public void setarrBooks(String[] arrBooks){
+		this.arrBooks = arrBooks;
+	}
+	
+	public String[] getarrBooks(){
+		return this.arrBooks;
+	}
 	
 	public void setManager(boolean check) {
 		this.isManager = check;
@@ -177,5 +243,29 @@ import javax.swing.text.PlainDocument;
 	
 	public boolean isManager() {
 		return this.isManager;
+	}
+	
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
+	public String getSearch() {
+		return this.search;
+	}
+	
+	public void setcategory(String category) {
+		this.category = category;
+	}
+	
+	public String getcategory() {
+		return this.category;
+	}
+	
+	public void setkeySearch(String keySearch) {
+		this.keySearch = keySearch;
+	}
+	
+	public String getkeySearch() {
+		return this.keySearch;
 	}
 }

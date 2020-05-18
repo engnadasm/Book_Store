@@ -61,6 +61,8 @@ public class MainFram extends JFrame{
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 450, 300);
 		frame.getContentPane().setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		
 		Label lblWelcome = new Label("Welcome");
 		lblWelcome.setForeground(Color.RED);
