@@ -411,7 +411,9 @@ AFTER UPDATE ON `bookstore`.`book`
 FOR EACH ROW
 BEGIN
 IF NEW.quantity < NEW.threshold THEN
-	INSERT INTO orders VALUES(NEW.ISBN,2 * NEW.threshold);
+	if (SELECT EXISTS(SELECT * from orders WHERE orders.ISBN = new.ISBN) = 0) then
+		INSERT INTO orders VALUES(NEW.ISBN,2 * NEW.threshold);
+	end if;
 
 END IF;
 END$$
