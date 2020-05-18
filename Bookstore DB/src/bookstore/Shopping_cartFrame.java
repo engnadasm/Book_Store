@@ -47,7 +47,7 @@ private static Start start = Start.getInstance();
 			new JPanel(), new JPanel(),new JPanel(),
 			new JPanel(), new JPanel(),new JPanel(),
 			new JPanel(),new JPanel()};
-    JButton[] all_Btn = new JButton[21];
+    JButton[] all_Btn = new JButton[31];
     
     private JTextField textField;
 	/**
@@ -225,6 +225,9 @@ private static Start start = Start.getInstance();
 			 all_Btn[2 * y - 1].addActionListener(new PageActionListene(y));
 			 
 			 all_Btn[2 * y].addActionListener(new PageActionListener2(y));
+		 
+			 //all_Btn[(3 * y) % 10 + ].addActionListener(new PageActionListener2(y));
+
 		 }
 	}
 	private class PageActionListener2 implements ActionListener {
@@ -311,6 +314,12 @@ private static Start start = Start.getInstance();
 		all_Btn[2].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[2].setForeground(Color.BLUE);
 		all_JPanel[1].add(all_Btn[2]);
+		
+		all_Btn[21] = new JButton("Confirm");
+		all_Btn[21].setBounds(490, 6, 89, 23);
+		all_Btn[21].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[21].setForeground(Color.BLUE);
+	//	all_JPanel[1].add(all_Btn[21]);
 
 //related to 2_book
 		//JPanel all_JPanel[2 = new JPanel();
@@ -349,6 +358,12 @@ private static Start start = Start.getInstance();
 		all_Btn[4].setForeground(Color.BLUE);
 		all_JPanel[2].add(all_Btn[4]);
 		
+		all_Btn[22] = new JButton("Confirm");
+		all_Btn[22].setBounds(490, 6, 89, 23);
+		all_Btn[22].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[22].setForeground(Color.BLUE);
+		//all_JPanel[2].add(all_Btn[22]);
+		
 //related to 3_book
 		//JPanel all_JPanel[3 = new JPanel();
 		all_JPanel[3].setLayout(null);
@@ -385,6 +400,12 @@ private static Start start = Start.getInstance();
 		all_Btn[6].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[6].setForeground(Color.BLUE);
 		all_JPanel[3].add(all_Btn[6]);
+		
+		all_Btn[23] = new JButton("Confirm");
+		all_Btn[23].setBounds(490, 6, 89, 23);
+		all_Btn[23].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[23].setForeground(Color.BLUE);
+	//	all_JPanel[3].add(all_Btn[23]);
 		
 //related to 4_book
 		//JPanel all_JPanel[4 = new JPanel();
@@ -423,6 +444,12 @@ private static Start start = Start.getInstance();
 		all_Btn[8].setForeground(Color.BLUE);
 		all_JPanel[4].add(all_Btn[8]);
 		
+		
+		all_Btn[24] = new JButton("Confirm");
+		all_Btn[24].setBounds(490, 6, 89, 23);
+		all_Btn[24].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[24].setForeground(Color.BLUE);
+	//	all_JPanel[4].add(all_Btn[24]);
 //related to 5_book
 		//JPanel all_JPanel[5 = new JPanel();
 		all_JPanel[5].setLayout(null);
@@ -459,6 +486,12 @@ private static Start start = Start.getInstance();
 		all_Btn[10].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[10].setForeground(Color.BLUE);
 		all_JPanel[5].add(all_Btn[10]);
+		
+		all_Btn[25] = new JButton("Confirm");
+		all_Btn[25].setBounds(490, 6, 89, 23);
+		all_Btn[25].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[25].setForeground(Color.BLUE);
+	//	all_JPanel[5].add(all_Btn[25]);
 		
 //related to 6_book
 		//JPanel all_JPanel[6 = new JPanel();
@@ -497,6 +530,12 @@ private static Start start = Start.getInstance();
 		all_Btn[12].setForeground(Color.BLUE);
 		all_JPanel[6].add(all_Btn[12]);
 		
+		all_Btn[26] = new JButton("Confirm");
+		all_Btn[26].setBounds(490, 6, 89, 23);
+		all_Btn[26].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[26].setForeground(Color.BLUE);
+	//	all_JPanel[6].add(all_Btn[26]);
+		
 //related to 7_book
 		//JPanel all_JPanel[7 = new JPanel();
 		all_JPanel[7].setLayout(null);
@@ -533,6 +572,12 @@ private static Start start = Start.getInstance();
 		all_Btn[14].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[14].setForeground(Color.BLUE);
 		all_JPanel[7].add(all_Btn[14]);
+		
+		all_Btn[27] = new JButton("Confirm");
+		all_Btn[27].setBounds(490, 6, 89, 23);
+		all_Btn[27].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[27].setForeground(Color.BLUE);
+//		all_JPanel[7].add(all_Btn[27]);
 		
 //related to 8_book
 		//JPanel all_JPanel[8 = new JPanel();
@@ -571,6 +616,12 @@ private static Start start = Start.getInstance();
 		all_Btn[16].setForeground(Color.BLUE);
 		all_JPanel[8].add(all_Btn[16]);
 		
+		all_Btn[28] = new JButton("Confirm");
+		all_Btn[28].setBounds(490, 6, 89, 23);
+		all_Btn[28].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[28].setForeground(Color.BLUE);
+	//	all_JPanel[8].add(all_Btn[28]);
+		
 //related to 9_book
 		//JPanel all_JPanel[9 = new JPanel();
 		all_JPanel[9].setLayout(null);
@@ -608,6 +659,12 @@ private static Start start = Start.getInstance();
 		all_Btn[18].setForeground(Color.BLUE);
 		all_JPanel[9].add(all_Btn[18]);
 		
+		all_Btn[29] = new JButton("Confirm");
+		all_Btn[29].setBounds(490, 6, 89, 23);
+		all_Btn[29].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[29].setForeground(Color.BLUE);
+	//	all_JPanel[9].add(all_Btn[29]);
+		
 //related to 10_book
 		//JPanel all_JPanel[10 = new JPanel();
 		all_JPanel[10].setLayout(null);
@@ -633,17 +690,23 @@ private static Start start = Start.getInstance();
 		all_JTextField[29].setBounds(190, 0, 90, 30);
 		all_JPanel[10].add(all_JTextField[29]);
 		
-		all_Btn[19] = new JButton("Remove");
+		all_Btn[19] = new JButton("Confirm");
 		all_Btn[19].setBounds(290, 6, 89, 23);
 		all_Btn[19].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[19].setForeground(Color.BLUE);
 		all_JPanel[10].add(all_Btn[19]);
 		
-		all_Btn[20] = new JButton("Info. of book");
+		all_Btn[20] = new JButton("Remove");
 		all_Btn[20].setBounds(389, 6, 89, 23);
 		all_Btn[20].setFont(new Font("Tahoma", Font.BOLD, 8));
 		all_Btn[20].setForeground(Color.BLUE);
 		all_JPanel[10].add(all_Btn[20]);
+		
+		all_Btn[30] = new JButton("Confirm");
+		all_Btn[30].setBounds(490, 6, 89, 23);
+		all_Btn[30].setFont(new Font("Tahoma", Font.BOLD, 8));
+		all_Btn[30].setForeground(Color.BLUE);
+	//	all_JPanel[10].add(all_Btn[30]);
 
 		function();
 	}
