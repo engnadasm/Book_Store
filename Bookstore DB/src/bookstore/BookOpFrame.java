@@ -1,12 +1,15 @@
 package bookstore;
 
 
+
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.JButton;
@@ -33,6 +36,8 @@ public class BookOpFrame {
 	private JTextField txtTelephone;
 	private JTextField txtAuthors;
 	private JTextField textField_Author;
+	private JList<String> list;
+	private JScrollPane scrollPane;
 	private JButton btnDelete;
 	private JTextField textField_ISBN;
 	private JTextField textField_Title;
@@ -45,7 +50,9 @@ public class BookOpFrame {
 	private JTextField textField_phone;
 	private JTextField textField_pyear;
 	private JTextField txtPublicationYear;
+	private JButton btnAddName;
 	private JButton btnAdd;
+	private DefaultListModel<String> l;
 	//confirm order
 	private JTextField textField_confirm;
 	private JTextField confrimISBN;
@@ -56,6 +63,7 @@ public class BookOpFrame {
 	private JTextField textField_Q;
 	private JTextField orderQuantity;
 	private JButton btnOrder;
+	//message
 	private JTextField textField_msg;
 
 
@@ -69,10 +77,8 @@ public class BookOpFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 550, 370);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		Start.Load_menubar(frame);
 		
 		JRadioButton rdbtnAddBook = new JRadioButton("Add book");
 		rdbtnAddBook.addActionListener(new ActionListener() {
@@ -80,6 +86,7 @@ public class BookOpFrame {
 				setAddBookVisibilty(true);
 				setConfirmVisibilty(false);
 				setOrderVisibilty(false);
+				textField_msg.setText("");
 			}
 		});
 		rdbtnAddBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -97,6 +104,7 @@ public class BookOpFrame {
 				setAddBookVisibilty(false);
 				setConfirmVisibilty(false);
 				setOrderVisibilty(true);
+				textField_msg.setText("");
 			}
 		});
 		rdbtnOrderBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -109,6 +117,7 @@ public class BookOpFrame {
 				setAddBookVisibilty(false);
 				setConfirmVisibilty(true);
 				setOrderVisibilty(false);
+				textField_msg.setText("");
 			}
 		});
 		rdbtnConfirmOrder.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -197,7 +206,7 @@ public class BookOpFrame {
 		txtTelephone.setText("Telephone");
 		txtTelephone.setEditable(false);
 		txtTelephone.setColumns(10);
-		txtTelephone.setBounds(342, 142, 60, 20);
+		txtTelephone.setBounds(329, 142, 73, 20);
 		frame.getContentPane().add(txtTelephone);
 		
 		txtAuthors = new JTextField();
@@ -207,41 +216,43 @@ public class BookOpFrame {
 		txtAuthors.setColumns(10);
 		txtAuthors.setBounds(408, 177, 102, 20);
 		frame.getContentPane().add(txtAuthors);
-		DefaultListModel<String> l = new DefaultListModel<>(); 
-		JList<String> list = new JList<>(l);
+		l = new DefaultListModel<>(); 
+		list = new JList<>(l);
 		list.setBounds(320, 200, 82, 60);
-		frame.getContentPane().add(list);
-		frame.getContentPane().add( new JScrollPane(list),BorderLayout.CENTER);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scrollPane = new JScrollPane(list);
+        scrollPane.setSize(82, 60);
+        scrollPane.setLocation(320, 200);
+        frame.getContentPane().add(scrollPane,BorderLayout.CENTER);
 		list.setVisible(true);
+		scrollPane.setVisible(true);
 		
 		textField_Author = new JTextField();
 		textField_Author.setBounds(320, 271, 82, 20);
 		frame.getContentPane().add(textField_Author);
 		textField_Author.setColumns(10);
 		
-		JButton btnAddName = new JButton("Add name");
+		btnAddName = new JButton("Add name");
 		btnAddName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!textField_Author.getText().equals("")) {
-					l.addElement(textField_Author.getText());
-				((DefaultListModel<String>) list.getModel()).addElement(textField_Author.getText());
-				/*l.addElement(textField_Author.getText());
-				JList<String> list = new JList<>(l);
-				list.setBounds(320, 200, 82, 60);
-				frame.getContentPane().add( new JScrollPane(list),BorderLayout.CENTER);
-				list.setVisible(true);*/
+				l.addElement(textField_Author.getText());
+				list.setVisible(true);
+				textField_Author.setText("");
+				System.out.println(l.getSize());
 				}
 			}
 		});
-		btnAddName.setBounds(423, 270, 89, 23);
+		btnAddName.setBounds(408, 270, 104, 23);
 		frame.getContentPane().add(btnAddName);
 		
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.print("before = "+ l.getSize());
 				if(list.getSelectedIndex() != -1){
 				l.removeElementAt(list.getSelectedIndex());
-				((DefaultListModel<String>) list.getModel()).removeElementAt(list.getSelectedIndex());
+				System.out.print(l.getSize());
 				}
 			}
 		});
@@ -296,12 +307,17 @@ public class BookOpFrame {
 		btnAdd = new JButton("ADD");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				authors = new String[l.getSize()];
+				for(int i = 0; i < l.getSize(); i++) {
+					authors[i]=l.getElementAt(i);
+				}
 				boolean noerror = IManager.addBook(textField_ISBN.getText(), textField_Title.getText(), textField_Price.getText(),
 						textField_Name.getText(), textField_Address.getText(), textField_phone.getText(), textField_pyear.getText(), textField_Category.getText(),
 						textField_Threshold.getText(), textField_Quantity.getText(), authors);
 				if(noerror) {
 					textField_msg.setForeground(Color.GREEN);
 					textField_msg.setText("Operation is successfully completed");
+					clearTextField();
 				}else {
 					textField_msg.setForeground(Color.RED);
 					textField_msg.setText("Error occured while execution");
@@ -326,12 +342,14 @@ public class BookOpFrame {
 		frame.getContentPane().add(confrimISBN);
 		
 		btnConfirm = new JButton("Confirm");
+		btnConfirm.setForeground(Color.RED);
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean noerror = IManager.confirmOrder(textField_confirm.getText());
 				if(noerror) {
 					textField_msg.setForeground(Color.GREEN);
 					textField_msg.setText("Operation is successfully completed");
+					textField_confirm.setText("");
 				}else {
 					textField_msg.setForeground(Color.RED);
 					textField_msg.setText("Error occured while execution");
@@ -362,6 +380,8 @@ public class BookOpFrame {
 				if(noerror) {
 					textField_msg.setForeground(Color.GREEN);
 					textField_msg.setText("Operation is successfully completed");
+					textField_I.setText("");
+					textField_Q.setText("");
 				}else {
 					textField_msg.setForeground(Color.RED);
 					textField_msg.setText("Error occured while execution");
@@ -392,7 +412,7 @@ public class BookOpFrame {
 		txtPublicationYear.setEditable(false);
 		txtPublicationYear.setEnabled(true);
 		txtPublicationYear.setText("Publication year");
-		txtPublicationYear.setBounds(101, 271, 89, 20);
+		txtPublicationYear.setBounds(95, 271, 95, 20);
 		frame.getContentPane().add(txtPublicationYear);
 		txtPublicationYear.setColumns(10);
 		
@@ -402,10 +422,12 @@ public class BookOpFrame {
 		frame.getContentPane().add(textField_msg);
 		textField_msg.setColumns(10);
 		
+		
 		//set all to invisible
 		setAddBookVisibilty(false);
 		setConfirmVisibilty(false);
 		setOrderVisibilty(false);
+		frame.setVisible(true);
 		
 	}
 	
@@ -436,7 +458,10 @@ public class BookOpFrame {
 		textField_phone.setVisible(v);
 		textField_pyear.setVisible(v);
 		txtPublicationYear.setVisible(v);
+		btnAddName.setVisible(v);
 		btnAdd.setVisible(v);
+		scrollPane.setVisible(v);
+		list.setVisible(v);
 	}
 	private void setConfirmVisibilty(boolean v ) {
 
@@ -451,5 +476,19 @@ public class BookOpFrame {
 		textField_Q.setVisible(v);
 		orderQuantity.setVisible(v);
 		btnOrder.setVisible(v);
+	}
+	private void clearTextField() {
+		textField_Author.setText("");
+		textField_ISBN.setText("");
+		textField_Title.setText("");
+		textField_Category.setText("");
+		textField_Price.setText("");
+		textField_Threshold.setText("");
+		textField_Quantity.setText("");
+		textField_Name.setText("");
+		textField_Address.setText("");
+		textField_phone.setText("");
+		textField_pyear.setText("");
+		l.removeAllElements();
 	}
 }

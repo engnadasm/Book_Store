@@ -1,6 +1,7 @@
 package bookstore;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -27,7 +28,7 @@ public class PromoteUserFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 270, 130);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
@@ -64,7 +65,7 @@ public class PromoteUserFrame {
 			}
 		});
 		btnPromote.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
-		btnPromote.setBounds(76, 63, 89, 23);
+		btnPromote.setBounds(65, 63, 119, 23);
 		frame.getContentPane().add(btnPromote);
 		frame.setVisible(true);
 	}

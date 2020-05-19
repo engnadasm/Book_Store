@@ -1,5 +1,6 @@
 package bookstore;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -30,6 +31,7 @@ public class Info_Book extends JFrame {
 	private Start s = Start.getInstance();
 
 	private JButton btnOK;
+	private JTextField textField_msg;
 	/**
 	 * Create the frame.
 	 */
@@ -161,17 +163,33 @@ public class Info_Book extends JFrame {
 		btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!s.isManager()) {
-					//Toqa
+				if(s.isManager()) {
+					
+					boolean noerror = IManager.modifyBook(s.getISBNInfo_Book(),ISBN_text.getText(), Title_text.getText(),
+														price_text.getText(),publishername_text.getText(),
+														p_year_text.getText(), category_text.getText(), quantity_text.getText());
+					if(noerror) {
+						textField_msg.setForeground(Color.GREEN);
+						textField_msg.setText("Operation is successfully completed");
+					}else {
+						textField_msg.setForeground(Color.RED);
+						textField_msg.setText("Error occured while execution");
+					}
 				}
 
-				mainFrame.hide();
+				//mainFrame.hide();
 			}
 		});
 		btnOK.setFont(new Font("Stencil", Font.BOLD, 16));
 		btnOK.setForeground(Color.BLUE);
-		btnOK.setBounds(188, 427, 129, 39);
+		btnOK.setBounds(186, 408, 129, 39);
 		mainFrame.getContentPane().add(btnOK);
+		
+		textField_msg = new JTextField();
+		textField_msg.setEditable(false);
+		textField_msg.setBounds(78, 458, 354, 20);
+		mainFrame.getContentPane().add(textField_msg);
+		textField_msg.setColumns(10);
 	}
 
 }
