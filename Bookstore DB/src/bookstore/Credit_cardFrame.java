@@ -94,15 +94,11 @@ public class Credit_cardFrame extends JFrame {
 						    String strDate = sdfDate.format(now);
 						   sqlSelect = "call order_insertion('"+  books[i] + "', "+ attr[8] + ",  '" + start.getUserEmail() + "' , '"+ strDate+ "');";
 						   try {
-							MainFram.stmt.addBatch(sqlSelect);
-							start.removeAllBookCart();
-							mainFrame.hide();
-							new Shopping_cartFrame();
-
-						} catch (SQLException e1) {
+							   MainFram.stmt.addBatch(sqlSelect);
+						   } catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}
+						   }
 
 						}
 						//System.out.println(sqlSelect);
@@ -116,6 +112,9 @@ public class Credit_cardFrame extends JFrame {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							start.removeAllBookCart();
+							mainFrame.hide();
+							new Shopping_cartFrame();
 					}
 				}
 				
