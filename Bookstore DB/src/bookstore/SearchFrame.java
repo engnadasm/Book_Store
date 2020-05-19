@@ -70,7 +70,7 @@ public class SearchFrame extends JFrame {
 			start.setBoolFirst(first);
 		}
 		mainFrame = new JFrame("Search");
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainFrame.setBounds(100, 100, 526, 550);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setVisible(true);
