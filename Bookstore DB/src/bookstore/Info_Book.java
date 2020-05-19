@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -171,13 +172,66 @@ public class Info_Book extends JFrame {
 					if(noerror) {
 						textField_msg.setForeground(Color.GREEN);
 						textField_msg.setText("Operation is successfully completed");
+						HashMap<String, String[]> books = new HashMap<String, String[]>();
+						books = s.getSearchBook();
+						
+						String[] attr = books.get(s.getISBNInfo_Book());
+						String[] arrBooks = new String[100000];
+						arrBooks = s.getarrBooks();
+						
+						String[] arrBooksCart = new String[100000];
+						arrBooksCart = s.getarrBooksCart();
+						
+						HashMap<String, String[]> cart = s.getCart();
+						
+						for(int i = 0; i < books.size(); i++) {
+							System.out.println(arrBooks[i]);
+							System.out.println(s.getISBNInfo_Book());
+							if(arrBooks[i].equals(s.getISBNInfo_Book())) {
+								arrBooks[i] = ISBN_text.getText();
+								break;
+							}
+							if(arrBooksCart[i].equals(s.getISBNInfo_Book())) {
+								arrBooksCart[i] = ISBN_text.getText();
+							}
+						}
+						for(int i = 0; i < books.size(); i++) {
+							if(arrBooksCart[i].equals(s.getISBNInfo_Book())) {
+								arrBooksCart[i] = ISBN_text.getText();
+								
+								break;
+							}
+						}
+						
+						attr[0] = Title_text.getText();
+						attr[4] = price_text.getText();
+						attr[2] = publishername_text.getText();
+						attr[1]	= p_year_text.getText();
+						attr[3] = category_text.getText();
+						attr[6] = quantity_text.getText();
+						if (cart != null) {
+							if(cart.containsKey(s.getISBNInfo_Book())) {
+								attr[7] = "1";
+								s.removeBookFromCart(s.getISBNInfo_Book());
+								s.addBookIntoCart(ISBN_text.getText(), attr);
+								
+							}
+						}
+						books.remove(s.getISBNInfo_Book());
+						books.put(ISBN_text.getText(), attr);
+						s.searchBooks(books);
+						s.setarrBooks(arrBooks);
+						s.setarrBooksCart(arrBooksCart);
+						
+						
 					}else {
 						textField_msg.setForeground(Color.RED);
 						textField_msg.setText("Error occured while execution");
 					}
 				}
 
-				//mainFrame.hide();
+				mainFrame.hide();
+				new SearchFrame();
 			}
 		});
 		btnOK.setFont(new Font("Stencil", Font.BOLD, 16));

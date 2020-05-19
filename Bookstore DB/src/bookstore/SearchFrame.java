@@ -151,6 +151,7 @@ public class SearchFrame extends JFrame {
 			
 		 for (int y = 1; y <= noCurrBook; y++) {
 			 all_JPanel[y].setVisible(true);
+			 arrBooks = start.getarrBooks();
 			 attr = books.get(arrBooks[(y - 1) + 10 * (currPag - 1)]);
 			 /*
 				 * 0- title
