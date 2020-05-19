@@ -191,15 +191,16 @@ public class Info_Book extends JFrame {
 								arrBooks[i] = ISBN_text.getText();
 								break;
 							}
-							if(arrBooksCart[i].equals(s.getISBNInfo_Book())) {
-								arrBooksCart[i] = ISBN_text.getText();
-							}
+							
 						}
-						for(int i = 0; i < books.size(); i++) {
-							if(arrBooksCart[i].equals(s.getISBNInfo_Book())) {
-								arrBooksCart[i] = ISBN_text.getText();
-								
-								break;
+						if (cart != null) {
+							if(cart.containsKey(s.getISBNInfo_Book())) {
+								for(int i = 0; i < arrBooksCart.length; i++) {
+									if(arrBooksCart[i].equals(s.getISBNInfo_Book())) {
+										arrBooksCart[i] = ISBN_text.getText();
+										break;
+									}
+								}
 							}
 						}
 						
