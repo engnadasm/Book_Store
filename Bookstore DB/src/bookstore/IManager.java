@@ -48,7 +48,7 @@ public interface IManager {
 									String pyear, String category, String quantity) {
 		
 		String sql = "UPDATE BOOK SET ISBN = '" + ISBN + "', Title = '" + title + "', price = " + price + ", publisher_name = '"+
-		pname + "', category = '" + category + "', quantity = " + quantity + ", p_year = '"+ pyear + "' where ISBN = '" + oldISBN + "';";
+		pname + "', category = '" + category + "', quantity = " + quantity + ", p_year = year('"+ pyear + "') where ISBN = '" + oldISBN + "';";
 			try {
 
 				MainFram.stmt.executeUpdate(sql);

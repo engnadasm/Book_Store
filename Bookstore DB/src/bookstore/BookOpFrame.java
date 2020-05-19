@@ -90,13 +90,8 @@ public class BookOpFrame {
 			}
 		});
 		rdbtnAddBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnAddBook.setBounds(6, 76, 120, 23);
+		rdbtnAddBook.setBounds(6, 108, 120, 23);
 		frame.getContentPane().add(rdbtnAddBook);
-		
-		JRadioButton rdbtnModifyBook = new JRadioButton("Modify book");
-		rdbtnModifyBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnModifyBook.setBounds(6, 123, 120, 23);
-		frame.getContentPane().add(rdbtnModifyBook);
 		
 		JRadioButton rdbtnOrderBook = new JRadioButton("Order book");
 		rdbtnOrderBook.addActionListener(new ActionListener() {
@@ -126,7 +121,6 @@ public class BookOpFrame {
 		
 		ButtonGroup bgroupOptions = new ButtonGroup();
 		bgroupOptions.add(rdbtnAddBook);
-		bgroupOptions.add(rdbtnModifyBook);
 		bgroupOptions.add(rdbtnOrderBook);
 		bgroupOptions.add(rdbtnConfirmOrder);
 		
