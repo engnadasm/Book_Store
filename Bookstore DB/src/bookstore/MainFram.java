@@ -37,7 +37,7 @@ public class MainFram extends JFrame{
 		try
         {
 			String userName = "root";
-			String password = "12345";
+			String password = "1234abcd";
 			String url = "jdbc:MySQL://localhost:3306/bookstore";        
 			conn = DriverManager.getConnection (url, userName, password);
 			System.out.println ("\nDatabase Connection Established...");
